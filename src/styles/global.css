@@ -8,4 +8,5 @@
 html,
 body {
   font-family: "Montserrat", sans-serif;
+  background: linear-gradient(to bottom, #ffede8, #fffaf8);
 }
