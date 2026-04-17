@@ -1,0 +1,13 @@
+---
+const filters = ["Sted", "Tid", "Type"];
+---
+
+<div class="filters">
+  {
+    filters.map((f) => (
+      <select>
+        <option>{f}</option>
+      </select>
+    ))
+  }
+</div>
