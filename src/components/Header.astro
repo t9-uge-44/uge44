@@ -1,5 +1,10 @@
 ---
 import "../styles/global.css";
+const { pathname } = Astro.url;
+const navLinks = [
+  { title: "Kalender", path: "/kalender.html" },
+  { title: "Guide", path: "/guide.html" },
+];
 ---
 
 <nav class="navbar">
@@ -43,8 +48,17 @@ import "../styles/global.css";
   </div>
 
   <ul class="nav-links">
-    <li><a href="kalender.html">Kalender</a></li>
-    <li><a href="guide.html">Arrangør-info</a></li>
+    {
+      navLinks.map((link) => {
+        return (
+          <li>
+            <a href={link.path} class={pathname === link.path ? "active" : undefined}>
+              {link.title}
+            </a>
+          </li>
+        );
+      })
+    }
   </ul>
   <button class="burger">
     <span class="line"></span>
@@ -54,6 +68,9 @@ import "../styles/global.css";
 </nav>
 
 <style>
+  .active {
+    border-bottom: 2px solid black;
+  }
   .nav-links {
     list-style: none;
     display: flex;
@@ -142,18 +159,13 @@ import "../styles/global.css";
 <script>
   const burger = document.querySelector(".burger");
   const nav = document.querySelector("nav");
+  const links = document.querySelectorAll("nav a");
 
-  burger.addEventListener("click", burgerClick);
-  function burgerClick() {
-    burger.classList.toggle("active");
-    nav.classList.toggle("active");
+  // 👉 Guard mod null
+  if (burger && nav) {
+    burger.addEventListener("click", () => {
+      burger.classList.toggle("active");
+      nav.classList.toggle("active");
+    });
   }
-
-  const links = document.querySelectorAll(".nav-links a");
-
-  links.forEach((link) => {
-    if (window.location.pathname.endsWith(link.getAttribute("href"))) {
-      link.classList.add("active");
-    }
-  });
 </script>
