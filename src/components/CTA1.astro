@@ -31,6 +31,11 @@ const { text, href } = Astro.props;
     border: none;
     cursor: pointer;
     text-decoration: none;
+    scale: 100%;
+    transition: scale 0.3s ease;
+    &:hover {
+      scale: 110%;
+    }
   }
 
   .cta-btn::after {
@@ -40,10 +45,6 @@ const { text, href } = Astro.props;
     left: 36px;
     border-right: 14px solid transparent;
     border-top: 16px solid #e56c45;
-  }
-
-  .cta-btn:hover {
-    scale: 105%;
   }
 
   .cta-btn:hover::after {
