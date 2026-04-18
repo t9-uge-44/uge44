@@ -1,10 +1,30 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Karrusel from "../components/Karrusel.astro";
 
-import Filters from "../components/Filters.astro";
-import WeekTabs from "../components/WeekTabs.astro";
-import Carousel from "../components/Carrousel.astro";
+const options = {
+  headers: {
+    apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhpY3V1Z21nb3h4c2R3c3RpYmtmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYzNzEzNjAsImV4cCI6MjA5MTk0NzM2MH0.4a7au5lWehXKI02kWYYgDvCWcqhFImnCVHl34kPFU1A",
+  },
+};
+
+const url = "https://xicuugmgoxxsdwstibkf.supabase.co/rest/v1/uge44";
+const response = await fetch(url, options);
+const data = await response.json();
+
+const kalenderSlides = data.map((event: any) => ({
+  title: event.titel,
+  text: event.teaser,
+  image: event.billede,
+  dag: event.ugedag,
+  sted: event.lokation,
+  tid: event.tidsrum,
+  type: event.type,
+  href: `/event/${event.id}`,
+}));
+
+const dage = ["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"];
 ---
 
 <html lang="da">
@@ -15,15 +35,7 @@ import Carousel from "../components/Carrousel.astro";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Kalender</title>
-
-    <style>
-      main {
-        padding: 2rem;
-        text-align: center;
-      }
-    </style>
   </head>
-
   <body>
     <header>
       <Header />
@@ -32,9 +44,57 @@ import Carousel from "../components/Carrousel.astro";
     <main>
       <h1>Hvad sker der i uge 44?</h1>
 
-      <Filters />
-      <WeekTabs />
-      <Carousel />
+      <section class="filter-sektion">
+        <label class="filter-knap">
+          Sted
+          <select id="filter-sted">
+            <option value="">Alle</option>
+          </select>
+        </label>
+        <label class="filter-knap">
+          Tid
+          <select id="filter-tid">
+            <option value="">Alle</option>
+          </select>
+        </label>
+        <label class="filter-knap">
+          Type
+          <select id="filter-type">
+            <option value="">Alle</option>
+          </select>
+        </label>
+      </section>
+
+      <div class="tabs-ydre">
+        <div class="tabs-wrapper">
+          <div class="tabs">
+            {
+              dage.map((dag, i) => (
+                <button class={`tab ${i === 0 ? "aktiv" : ""}`} data-dag={dag} aria-label={dag}>
+                  <svg width="46" height="41" viewBox="0 0 46 41" class="boble-svg" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23 0C35.7025 0 46 7.83502 46 17.5C46 27.165 35.7025 35 23 35C21.1155 35 19.2841 34.8263 17.5312 34.501L8 41V30.7656C3.10179 27.5564 0 22.8041 0 17.5C0 7.83502 10.2975 0 23 0Z" />
+                    <text x="23" y="19" text-anchor="middle" dominant-baseline="middle" font-size="11" font-weight="700" font-family="inherit">
+                      {dag.substring(0, 3)}
+                    </text>
+                  </svg>
+                </button>
+              ))
+            }
+          </div>
+        </div>
+        <div id="trekant" class="trekant"></div>
+      </div>
+
+      <div class="karrusel-container">
+        <p id="ingen-resultater" style="display:none;">Ingen events matcher din søgning.</p>
+        <section id="karrusel-sektion">
+          <Karrusel slides={kalenderSlides} />
+        </section>
+      </div>
+
+      <div id="event-meta" style="display:none">
+        {kalenderSlides.map((e: any, i: number) => <span data-index={i} data-dag={e.dag} data-sted={e.sted} data-tid={e.tid} data-type={e.type} />)}
+      </div>
     </main>
 
     <footer>
@@ -42,3 +102,262 @@ import Carousel from "../components/Carrousel.astro";
     </footer>
   </body>
 </html>
+
+<style>
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  .filter-sektion {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .filter-knap {
+    background: white;
+    color: #e56c45;
+    border: 2px solid #e56c45;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  select {
+    border: none;
+    color: #e56c45;
+    background: transparent;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* Wrapper der holder både tabs og trekant */
+  .tabs-ydre {
+    position: relative;
+    margin-bottom: 0;
+  }
+
+  .tabs-wrapper {
+    background: #e56c45;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+  }
+
+  .tabs {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .tab {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s;
+  }
+
+  .boble-svg {
+    width: 52px;
+    height: 46px;
+    fill: #fdd8c8;
+    transition: fill 0.15s;
+  }
+
+  .boble-svg text {
+    fill: #e56c45;
+    transition: fill 0.15s;
+  }
+
+  .tab.aktiv .boble-svg {
+    fill: white;
+  }
+
+  .tab.aktiv .boble-svg text {
+    fill: #e56c45;
+  }
+
+  .tab:hover .boble-svg {
+    scale: 115%;
+  }
+
+  /* Trekanten */
+  .trekant {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 1.5rem solid #e56c45;
+    position: absolute;
+    bottom: -1.5rem;
+    transition: left 0.2s ease;
+    transform: translateX(-50%);
+  }
+
+  .karrusel-container {
+    position: relative;
+    margin-top: 14px;
+  }
+
+  #karrusel-sektion :global(.karrusel-wrapper) {
+    padding: 1rem 0 3rem;
+  }
+
+  #karrusel-sektion {
+    position: relative;
+  }
+
+  #ingen-resultater {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #e56c45;
+    z-index: 10;
+    white-space: nowrap;
+  }
+
+  #karrusel-sektion :global(.karrusel) {
+    border-radius: 16px;
+    background: white;
+  }
+</style>
+
+<script>
+  const metaNodes = document.querySelectorAll<HTMLElement>("#event-meta span");
+  const slides = document.querySelectorAll<HTMLElement>(".slide");
+  const allDots = document.querySelectorAll<HTMLElement>(".dot");
+  const tabButtons = document.querySelectorAll<HTMLElement>(".tab");
+  const ingenResultater = document.getElementById("ingen-resultater")!;
+  const trekant = document.getElementById("trekant") as HTMLElement;
+
+  let aktivDag = "";
+
+  function flytTrekant(btn: HTMLElement) {
+    const tabsWrapper = document.querySelector(".tabs-wrapper") as HTMLElement;
+    const btnRect = btn.getBoundingClientRect();
+    const wrapperRect = tabsWrapper.getBoundingClientRect();
+    const center = btnRect.left - wrapperRect.left + btnRect.width / 2;
+    trekant.style.left = `${center}px`;
+  }
+
+  function udfyldDropdown(id: string, værdier: string[]) {
+    const select = document.getElementById(id) as HTMLSelectElement;
+    const unikke = [...new Set(værdier)].sort();
+    unikke.forEach((v) => {
+      const opt = document.createElement("option");
+      opt.value = v;
+      opt.textContent = v;
+      select.appendChild(opt);
+    });
+  }
+
+  const meta = [...metaNodes].map((el) => ({
+    index: Number(el.dataset.index),
+    dag: el.dataset.dag ?? "",
+    sted: el.dataset.sted ?? "",
+    tid: el.dataset.tid ?? "",
+    type: el.dataset.type ?? "",
+  }));
+
+  udfyldDropdown(
+    "filter-sted",
+    meta.map((e) => e.sted),
+  );
+  udfyldDropdown(
+    "filter-tid",
+    meta.map((e) => e.tid),
+  );
+  udfyldDropdown(
+    "filter-type",
+    meta.map((e) => e.type),
+  );
+
+  function nulstilKarrusel(synligeIndexes: number[]) {
+    slides.forEach((slide) => slide.classList.remove("aktiv"));
+    allDots.forEach((dot) => dot.classList.remove("aktiv"));
+
+    if (synligeIndexes.length === 0) return;
+
+    slides[synligeIndexes[0]]?.classList.add("aktiv");
+    allDots.forEach((dot) => {
+      if (Number(dot.dataset.i) === synligeIndexes[0]) {
+        dot.classList.add("aktiv");
+      }
+    });
+
+    document.dispatchEvent(new CustomEvent("filtrer-opdater"));
+  }
+
+  function filtrer() {
+    const sted = (document.getElementById("filter-sted") as HTMLSelectElement).value;
+    const tid = (document.getElementById("filter-tid") as HTMLSelectElement).value;
+    const type = (document.getElementById("filter-type") as HTMLSelectElement).value;
+
+    const synlige: number[] = [];
+
+    meta.forEach((e) => {
+      const match = (!aktivDag || e.dag === aktivDag) && (!sted || e.sted === sted) && (!tid || e.tid === tid) && (!type || e.type === type);
+
+      const slide = slides[e.index];
+      if (slide) slide.style.display = match ? "" : "none";
+
+      allDots.forEach((dot) => {
+        if (Number(dot.dataset.i) === e.index) {
+          (dot as HTMLElement).style.display = match ? "" : "none";
+        }
+      });
+
+      if (match) synlige.push(e.index);
+    });
+
+    const karruselSektion = document.getElementById("karrusel-sektion")!;
+    if (synlige.length === 0) {
+      ingenResultater.style.display = "block";
+      karruselSektion.style.visibility = "hidden";
+    } else {
+      ingenResultater.style.display = "none";
+      karruselSektion.style.visibility = "visible";
+    }
+
+    nulstilKarrusel(synlige);
+  }
+
+  document.getElementById("filter-sted")?.addEventListener("change", filtrer);
+  document.getElementById("filter-tid")?.addEventListener("change", filtrer);
+  document.getElementById("filter-type")?.addEventListener("change", filtrer);
+
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      tabButtons.forEach((b) => b.classList.remove("aktiv"));
+      btn.classList.add("aktiv");
+      aktivDag = btn.dataset.dag ?? "";
+      flytTrekant(btn);
+      filtrer();
+    });
+  });
+
+  // Placer trekanten under første aktive knap ved start
+  const førsteAktiv = document.querySelector<HTMLElement>(".tab.aktiv");
+  if (førsteAktiv) flytTrekant(førsteAktiv);
+</script>

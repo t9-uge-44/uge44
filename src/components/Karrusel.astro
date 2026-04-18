@@ -1,33 +1,24 @@
 ---
-const slides = [
-  {
-    title: "Bliv ved med at invitere",
-    text: "Selvom din ven måske siger nej, kan det betyde meget stadig at blive inviteret med. Fortsæt med at invitere til små aktiviteter som en gåtur, en kop kaffe eller bare at hænge ud. Det viser, at du stadig tænker på dem og gerne vil være der.",
-    image: "../../img/img-uge44/alone.webp",
-  },
-  {
-    title: "Vær ikke bange for stilhed",
-    text: "Stilhed kan føles akavet, men i sorg kan den faktisk være tryg. Din ven har måske ikke altid ord for det, de går igennem, og det er helt okay. Ved at blive i stilheden viser du, at du kan rumme deres følelser uden at presse dem til at sige noget. Det sender et stærkt signal om, at de ikke behøver præstere eller forklare sig for at være sammen med dig.",
-    image: "../../img/img-uge44/workshop.webp",
-  },
-  {
-    title: "Lyt og vær til stede",
-    text: "Du behøver ikke have de rigtige ord eller løsninger. Når nogen er i sorg, handler det sjældent om at “fikse” noget, men om at føle sig set og forstået. Giv din ven plads til at dele tanker og følelser i deres eget tempo, og vis gennem dit nærvær, at de ikke står alene. Nogle gange er det mest værdifulde bare at sidde sammen og lytte uden at afbryde eller komme med gode råd.",
-    image: "../../img/img-uge44/talking.webp",
-  },
-  {
-    title: "Send en sms",
-    text: "Selv små tegn på omsorg kan betyde rigtig meget. En kort besked som “Jeg tænker på dig” eller “Jeg er her, hvis du har brug for mig” kan give din ven en følelse af ikke at være glemt midt i sorgen. Det behøver ikke være perfekt formuleret — det vigtigste er, at du rækker ud og viser, at du husker dem, også når dagene går videre for alle andre.",
-    image: "../../img/img-uge44/texting.webp",
-  },
-];
+import CTA1 from "./CTA1.astro";
+
+interface Slide {
+  title: string;
+  text: string;
+  image: string;
+}
+
+interface Props {
+  slides: Slide[];
+  titel?: string;
+}
+
+const { slides, titel } = Astro.props;
 ---
 
 <section class="karrusel-wrapper">
-  <h2 class="karrusel-titel">Gode råd til at støtte en ven i sorg</h2>
+  {titel && <h2 class="karrusel-titel">{titel}</h2>}
 
   <div class="karrusel">
-    <!-- Desktop: pile inde i karrusellen -->
     <button class="pil venstre desktop-pil" id="forrige-desktop" aria-label="Forrige">&#8249;</button>
 
     <div class="slides-container">
@@ -40,6 +31,11 @@ const slides = [
             <div class="tekst">
               <h3>{slide.title}</h3>
               <p>{slide.text}</p>
+              {slide.href && (
+                <div class="cta-wrapper">
+                  <CTA1 text="Se mere" href={slide.href} />
+                </div>
+              )}
             </div>
           </div>
         ))
@@ -49,24 +45,22 @@ const slides = [
     <button class="pil højre desktop-pil" id="næste-desktop" aria-label="Næste">&#8250;</button>
   </div>
 
-  <!-- Mobil: pile og dots samlet i en række under karrusellen -->
   <div class="mobil-navigation">
     <button class="pil" id="forrige-mobil" aria-label="Forrige">&#8249;</button>
-    <div class="dots" id="dots">
+    <div class="dots">
       {slides.map((_, i) => <button class={`dot ${i === 0 ? "aktiv" : ""}`} data-i={i} aria-label={`Gå til slide ${i + 1}`} />)}
     </div>
     <button class="pil" id="næste-mobil" aria-label="Næste">&#8250;</button>
   </div>
 
-  <!-- Desktop: dots under karrusellen -->
-  <div class="desktop-dots" id="desktop-dots">
+  <div class="desktop-dots">
     {slides.map((_, i) => <button class={`dot ${i === 0 ? "aktiv" : ""}`} data-i={i} aria-label={`Gå til slide ${i + 1}`} />)}
   </div>
 </section>
 
 <style>
   .karrusel-wrapper {
-    padding: 2rem 1rem 3rem;
+    padding: 2rem 0 3rem;
     text-align: center;
   }
 
@@ -76,7 +70,6 @@ const slides = [
     margin-bottom: 2rem;
   }
 
-  /* ── DESKTOP ── */
   .karrusel {
     position: relative;
     display: flex;
@@ -84,7 +77,6 @@ const slides = [
     justify-content: center;
     background: #f5c5ae;
     border-radius: 60% 60% 60% 60% / 20% 20% 20% 20%;
-    padding: 3rem 5rem;
     min-height: 420px;
   }
 
@@ -118,6 +110,7 @@ const slides = [
     font-size: 1rem;
     line-height: 1.7;
     color: #333;
+    max-width: 70%;
   }
 
   .billede {
@@ -145,8 +138,6 @@ const slides = [
     flex-shrink: 0;
     transition: background 0.15s;
     display: flex;
-    padding-bottom: 0.15em;
-    padding-left: 0.05em;
     align-items: center;
     justify-content: center;
   }
@@ -155,7 +146,6 @@ const slides = [
     background: #a8522a;
   }
 
-  /* Desktop dots */
   .desktop-dots {
     display: flex;
     justify-content: center;
@@ -177,12 +167,14 @@ const slides = [
     background: #e56c45;
   }
 
-  /* Skjul mobil-navigation på desktop */
   .mobil-navigation {
     display: none;
   }
 
-  /* ── MOBIL ── */
+  .cta-wrapper {
+    margin-top: 1.5rem;
+  }
+
   @media (max-width: 800px) {
     .karrusel {
       border-radius: 24px;
@@ -191,12 +183,7 @@ const slides = [
       min-height: unset;
     }
 
-    /* Skjul desktop-pile på mobil */
-    .desktop-pil {
-      display: none;
-    }
-
-    /* Skjul desktop-dots på mobil */
+    .desktop-pil,
     .desktop-dots {
       display: none;
     }
@@ -219,7 +206,6 @@ const slides = [
       padding: 0 0.25rem;
     }
 
-    /* Vis mobil-navigation */
     .mobil-navigation {
       display: flex;
       align-items: center;
@@ -236,34 +222,57 @@ const slides = [
 </style>
 
 <script>
-  const slides = document.querySelectorAll(".slide");
+  const alleSlides = document.querySelectorAll(".slide");
   const allDots = document.querySelectorAll(".dot");
-  let aktuel = 0;
+  let aktivSlide = 0;
 
-  function visSlide(n) {
-    slides[aktuel].classList.remove("aktiv");
-    allDots.forEach((dot, i) => {
-      if (Number((dot as HTMLElement).dataset.i) === aktuel) {
-        dot.classList.remove("aktiv");
-      }
-    });
+  function getSynlige(): HTMLElement[] {
+    return [...alleSlides].filter((s) => (s as HTMLElement).style.display !== "none") as HTMLElement[];
+  }
 
-    aktuel = (n + slides.length) % slides.length;
+  function opdaterDots() {
+    const synlige = getSynlige();
+    const aktivSlideEl = synlige[aktivSlide];
+    const aktivIndex = Number((aktivSlideEl as HTMLElement)?.dataset.index);
 
-    slides[aktuel].classList.add("aktiv");
     allDots.forEach((dot) => {
-      if (Number((dot as HTMLElement).dataset.i) === aktuel) {
-        dot.classList.add("aktiv");
-      }
+      const dotIndex = Number((dot as HTMLElement).dataset.i);
+      // Skjul dots for skjulte slides
+      const slideForDot = [...alleSlides].find((s) => Number((s as HTMLElement).dataset.index) === dotIndex);
+      (dot as HTMLElement).style.display = (slideForDot as HTMLElement)?.style.display === "none" ? "none" : "";
+
+      // Sæt aktiv kun på den aktuelle
+      dot.classList.toggle("aktiv", dotIndex === aktivIndex);
     });
   }
 
-  document.getElementById("forrige-desktop")?.addEventListener("click", () => visSlide(aktuel - 1));
-  document.getElementById("næste-desktop")?.addEventListener("click", () => visSlide(aktuel + 1));
-  document.getElementById("forrige-mobil")?.addEventListener("click", () => visSlide(aktuel - 1));
-  document.getElementById("næste-mobil")?.addEventListener("click", () => visSlide(aktuel + 1));
+  function visSlide(n: number) {
+    const synlige = getSynlige();
+    if (synlige.length === 0) return;
+
+    synlige[aktivSlide]?.classList.remove("aktiv");
+    aktivSlide = ((n % synlige.length) + synlige.length) % synlige.length;
+    synlige[aktivSlide]?.classList.add("aktiv");
+
+    opdaterDots();
+  }
+
+  // Kør opdaterDots ved start så kun relevante dots vises
+  opdaterDots();
+
+  document.getElementById("forrige-desktop")?.addEventListener("click", () => visSlide(aktivSlide - 1));
+  document.getElementById("næste-desktop")?.addEventListener("click", () => visSlide(aktivSlide + 1));
+  document.getElementById("forrige-mobil")?.addEventListener("click", () => visSlide(aktivSlide - 1));
+  document.getElementById("næste-mobil")?.addEventListener("click", () => visSlide(aktivSlide + 1));
 
   allDots.forEach((dot) => {
-    dot.addEventListener("click", () => visSlide(Number((dot as HTMLElement).dataset.i)));
+    dot.addEventListener("click", () => {
+      const synlige = getSynlige();
+      const slideIndex = Number((dot as HTMLElement).dataset.i);
+      const synligIndex = synlige.findIndex((s) => Number((s as HTMLElement).dataset.index) === slideIndex);
+      if (synligIndex !== -1) visSlide(synligIndex);
+    });
   });
+
+  document.addEventListener("filtrer-opdater", () => opdaterDots());
 </script>

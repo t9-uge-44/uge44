@@ -1,0 +1,223 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import CTA1 from "../../components/CTA1.astro";
+
+export async function getStaticPaths() {
+  const options = {
+    headers: {
+      apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhpY3V1Z21nb3h4c2R3c3RpYmtmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYzNzEzNjAsImV4cCI6MjA5MTk0NzM2MH0.4a7au5lWehXKI02kWYYgDvCWcqhFImnCVHl34kPFU1A",
+    },
+  };
+
+  const response = await fetch("https://xicuugmgoxxsdwstibkf.supabase.co/rest/v1/uge44", options);
+  const data = await response.json();
+
+  return data.map((event: any) => ({
+    params: { id: String(event.id) },
+    props: { event },
+  }));
+}
+
+const { event } = Astro.props;
+
+const niceToKnow = ["Varighed: ca. 60 minutter", "Gratis at deltage", "Målgruppe: Unge og unge voksne", "Du kan deltage alene eller med en ven", "Fokus på konkrete redskaber", "Workshoppen foregår i trygge og uformelle rammer"];
+---
+
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{event.titel}</title>
+  </head>
+  <body>
+    <header>
+      <Header />
+    </header>
+
+    <main>
+      <!-- Hero sektion -->
+      <section class="hero">
+        <div class="hero-tekst">
+          <h1>{event.titel}</h1>
+          <p class="teaser">{event.teaser}</p>
+          <div class="cta-wrapper">
+            <CTA1 text="Tilmeld dig" href="/kalender" />
+          </div>
+        </div>
+        <div class="hero-billede">
+          <img src={event.billede} alt={event.titel} />
+        </div>
+      </section>
+
+      <!-- Beskrivelse sektion -->
+      <section class="beskrivelse-sektion">
+        <div class="beskrivelse-tekst">
+          <p>{event.beskrivelse}</p>
+        </div>
+      </section>
+
+      <!-- Nice to know -->
+      <section class="nice-to-know">
+        <div class="ntk-venstre">
+          <h2>Nice to know</h2>
+          <ul>
+            {niceToKnow.map((punkt) => <li>{punkt}</li>)}
+          </ul>
+        </div>
+        <div class="ntk-billede">
+          <img src={event.billede} alt="Nice to know" />
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <Footer />
+    </footer>
+  </body>
+</html>
+
+<style>
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    background: #f5e8e2;
+    border-radius: 32px;
+    padding: 3rem;
+  }
+
+  .hero-tekst {
+    flex: 1;
+  }
+
+  .hero-tekst h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .teaser {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-wrapper {
+    padding-bottom: 20px;
+  }
+
+  .hero-billede {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-billede img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 20px;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+  }
+
+  /* ── Beskrivelse ── */
+  .beskrivelse-sektion {
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+  }
+
+  .beskrivelse-tekst p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #333;
+    max-width: 600px;
+  }
+
+  /* ── Nice to know ── */
+  .nice-to-know {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+    background: #f5e8e2;
+    border-radius: 32px;
+    padding: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .ntk-venstre {
+    flex: 1;
+  }
+
+  .ntk-venstre h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  .ntk-venstre ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .ntk-venstre li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: #333;
+  }
+
+  .ntk-venstre li::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #333;
+    flex-shrink: 0;
+  }
+
+  .ntk-billede {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .ntk-billede img {
+    width: 100%;
+    max-width: 360px;
+    border-radius: 20px;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+  }
+
+  /* ── Mobil ── */
+  @media (max-width: 768px) {
+    .hero,
+    .nice-to-know {
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+    }
+
+    .hero-billede img,
+    .ntk-billede img {
+      max-width: 100%;
+    }
+  }
+</style>

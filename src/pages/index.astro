@@ -3,56 +3,83 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CTA1 from "../components/CTA1.astro";
 import Karrusel from "../components/Karrusel.astro";
+
+const forsideSlides = [
+  {
+    title: "Bliv ved med at invitere",
+    text: "Selvom din ven måske siger nej, kan det betyde meget stadig at blive inviteret med. Fortsæt med at invitere til små aktiviteter som en gåtur, en kop kaffe eller bare at hænge ud. Det viser, at du stadig tænker på dem og gerne vil være der.",
+    image: "/img/img-uge44/alone.webp",
+  },
+  {
+    title: "Vær ikke bange for stilhed",
+    text: "Stilhed kan føles akavet, men i sorg kan den faktisk være tryg. Din ven har måske ikke altid ord for det, de går igennem, og det er helt okay.",
+    image: "/img/img-uge44/workshop.webp",
+  },
+  {
+    title: "Lyt og vær til stede",
+    text: "Du behøver ikke have de rigtige ord eller løsninger. Giv din ven plads til at dele tanker og følelser i deres eget tempo.",
+    image: "/img/img-uge44/talking.webp",
+  },
+  {
+    title: "Send en sms",
+    text: 'Selv små tegn på omsorg kan betyde rigtig meget. En kort besked som "Jeg tænker på dig" kan give din ven en følelse af ikke at være glemt.',
+    image: "/img/img-uge44/texting.webp",
+  },
+];
 ---
 
-<html lang="en">
+<html lang="da">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <title>Uge 44</title>
   </head>
-  <header>
-    <Header />
-  </header>
   <body>
-    <section>
-      <h1>Om os og konceptet</h1>
-      <img src="../../public/img/img-uge44/gravestone.webp" alt="gravsted" />
-      <p>
-        I uge 44 sætter vi fokus på døden - og på hvordan vi kan være der for hinanden. Mange unge oplever, at det kan være svært at tale om døden, især når en ven har mistet. Derfor samler vi i uge 44 arrangementer, gode råd og inspiration, der gør
-        det lettere at starte samtalen og støtte andre i sorg.
-      </p>
-      <CTA1 text="Kalender" href="/kalender" />
-      <CTA1 text="Inspiration" href="/guide" />
-    </section>
-    <section>
-      <Karrusel />
-      <h2>Gode råd til at støtte en ven i sorg</h2>
-      <img src="../../public/img/img-uge44/texting.webp" alt="texting" />
-      <p>Det kan være svært at vide, hvad man skal sige eller gøre, når en ven mister. Her finder du en række enkle råd, der kan hjælpe dig med at være der for en ven i sorg — også selvom du ikke selv har erfaring med døden.</p>
-    </section>
-    <section>
-      <h2>Hvad sker der i uge 44?</h2>
-      <p>Card</p>
-      <p>Card</p>
-      <p>Card</p>
-      <p>Card</p>
-    </section>
-    <section>
-      <h2>Find inspiration og viden</h2>
-      <img src="../../public/img/img-uge44/inspo.webp" alt="inspiration" />
-      <p>
-        Bliv klogere på, hvordan du kan støtte en ven i sorg. Det kan være svært at vide, hvad man skal sige eller gøre, når en person tæt på dig mister. Her finder du artikler, personlige fortællinger og konkrete råd, der kan hjælpe dig med at
-        forstå sorg bedre og gøre det lettere at tage de svære samtaler.
-      </p>
-      <p>Formålet er at give dig inspiration og redskaber, så du kan føle dig mere tryg i at være der for andre – også når ordene er svære at finde.</p>
-      <CTA1 text="Se mere" href="/guide" />
-    </section>
+    <header>
+      <Header />
+    </header>
+
+    <main>
+      <section>
+        <h1>Om os og konceptet</h1>
+        <img src="/img/img-uge44/gravestone.webp" alt="gravsted" />
+        <p>
+          I uge 44 sætter vi fokus på døden - og på hvordan vi kan være der for hinanden. Mange unge oplever, at det kan være svært at tale om døden, især når en ven har mistet. Derfor samler vi i uge 44 arrangementer, gode råd og inspiration, der
+          gør det lettere at starte samtalen og støtte andre i sorg.
+        </p>
+        <CTA1 text="Kalender" href="/kalender" />
+        <CTA1 text="Inspiration" href="/guide" />
+      </section>
+
+      <section>
+        <Karrusel slides={forsideSlides} titel="Gode råd til at støtte en ven i sorg" />
+      </section>
+
+      <section>
+        <h2>Hvad sker der i uge 44?</h2>
+        <p>Card</p>
+        <p>Card</p>
+        <p>Card</p>
+        <p>Card</p>
+      </section>
+
+      <section>
+        <h2>Find inspiration og viden</h2>
+        <img src="/img/img-uge44/inspo.webp" alt="inspiration" />
+        <p>
+          Bliv klogere på, hvordan du kan støtte en ven i sorg. Det kan være svært at vide, hvad man skal sige eller gøre, når en person tæt på dig mister. Her finder du artikler, personlige fortællinger og konkrete råd, der kan hjælpe dig med at
+          forstå sorg bedre og gøre det lettere at tage de svære samtaler.
+        </p>
+        <p>Formålet er at give dig inspiration og redskaber, så du kan føle dig mere tryg i at være der for andre – også når ordene er svære at finde.</p>
+        <CTA1 text="Se mere" href="/guide" />
+      </section>
+    </main>
+
+    <footer>
+      <Footer />
+    </footer>
   </body>
-  <footer><Footer /></footer>
-
-
 </html>
