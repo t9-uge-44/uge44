@@ -1,12 +1,22 @@
 ---
-const { title, description, image } = Astro.props;
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  dag: string;
+  sted: string;
+  tid: string;
+  type: string;
+}
+
+const { title, description, image, dag, sted, tid, type } = Astro.props;
 ---
 
-<div class="card">
-  <img src={image} alt="" />
-  <div class="content">
-    <h2>{title}</h2>
+<div class="event-card" data-dag={dag} data-sted={sted} data-tid={tid} data-type={type}>
+  <img src={image} alt={title} />
+  <div class="info">
+    <h3>{title}</h3>
     <p>{description}</p>
-    <button>Se mere</button>
+    <a href="#" class="cta-btn">Se mere</a>
   </div>
 </div>
