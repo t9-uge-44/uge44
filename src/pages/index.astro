@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CTA1 from "../components/CTA1.astro";
+import Karrusel from "../components/Karrusel.astro";
 ---
 
 <html lang="en">
@@ -17,14 +18,39 @@ import CTA1 from "../components/CTA1.astro";
     <Header />
   </header>
   <body>
-    <h1>Om os og konceptet</h1>
-    <img src="" alt="" />
-    <p>
-      I uge 44 sætter vi fokus på døden - og på hvordan vi kan være der for hinanden. Mange unge oplever, at det kan være svært at tale om døden, især når en ven har mistet. Derfor samler vi i uge 44 arrangementer, gode råd og inspiration, der gør
-      det lettere at starte samtalen og støtte andre i sorg.
-    </p>
-    <CTA1 text="Kalender" href="/kalender" />
-    <CTA1 text="Inspiration" href="/inspiration" />
+    <section>
+      <h1>Om os og konceptet</h1>
+      <img src="../../public/img/img-uge44/gravestone.webp" alt="gravsted" />
+      <p>
+        I uge 44 sætter vi fokus på døden - og på hvordan vi kan være der for hinanden. Mange unge oplever, at det kan være svært at tale om døden, især når en ven har mistet. Derfor samler vi i uge 44 arrangementer, gode råd og inspiration, der gør
+        det lettere at starte samtalen og støtte andre i sorg.
+      </p>
+      <CTA1 text="Kalender" href="/kalender" />
+      <CTA1 text="Inspiration" href="/guide" />
+    </section>
+    <section>
+      <Karrusel />
+      <h2>Gode råd til at støtte en ven i sorg</h2>
+      <img src="../../public/img/img-uge44/texting.webp" alt="texting" />
+      <p>Det kan være svært at vide, hvad man skal sige eller gøre, når en ven mister. Her finder du en række enkle råd, der kan hjælpe dig med at være der for en ven i sorg — også selvom du ikke selv har erfaring med døden.</p>
+    </section>
+    <section>
+      <h2>Hvad sker der i uge 44?</h2>
+      <p>Card</p>
+      <p>Card</p>
+      <p>Card</p>
+      <p>Card</p>
+    </section>
+    <section>
+      <h2>Find inspiration og viden</h2>
+      <img src="../../public/img/img-uge44/inspo.webp" alt="inspiration" />
+      <p>
+        Bliv klogere på, hvordan du kan støtte en ven i sorg. Det kan være svært at vide, hvad man skal sige eller gøre, når en person tæt på dig mister. Her finder du artikler, personlige fortællinger og konkrete råd, der kan hjælpe dig med at
+        forstå sorg bedre og gøre det lettere at tage de svære samtaler.
+      </p>
+      <p>Formålet er at give dig inspiration og redskaber, så du kan føle dig mere tryg i at være der for andre – også når ordene er svære at finde.</p>
+      <CTA1 text="Se mere" href="/guide" />
+    </section>
   </body>
   <footer><Footer /></footer>
 
