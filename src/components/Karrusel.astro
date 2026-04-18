@@ -1,0 +1,269 @@
+---
+const slides = [
+  {
+    title: "Bliv ved med at invitere",
+    text: "Selvom din ven måske siger nej, kan det betyde meget stadig at blive inviteret med. Fortsæt med at invitere til små aktiviteter som en gåtur, en kop kaffe eller bare at hænge ud. Det viser, at du stadig tænker på dem og gerne vil være der.",
+    image: "../../img/img-uge44/alone.webp",
+  },
+  {
+    title: "Vær ikke bange for stilhed",
+    text: "Stilhed kan føles akavet, men i sorg kan den faktisk være tryg. Din ven har måske ikke altid ord for det, de går igennem, og det er helt okay. Ved at blive i stilheden viser du, at du kan rumme deres følelser uden at presse dem til at sige noget. Det sender et stærkt signal om, at de ikke behøver præstere eller forklare sig for at være sammen med dig.",
+    image: "../../img/img-uge44/workshop.webp",
+  },
+  {
+    title: "Lyt og vær til stede",
+    text: "Du behøver ikke have de rigtige ord eller løsninger. Når nogen er i sorg, handler det sjældent om at “fikse” noget, men om at føle sig set og forstået. Giv din ven plads til at dele tanker og følelser i deres eget tempo, og vis gennem dit nærvær, at de ikke står alene. Nogle gange er det mest værdifulde bare at sidde sammen og lytte uden at afbryde eller komme med gode råd.",
+    image: "../../img/img-uge44/talking.webp",
+  },
+  {
+    title: "Send en sms",
+    text: "Selv små tegn på omsorg kan betyde rigtig meget. En kort besked som “Jeg tænker på dig” eller “Jeg er her, hvis du har brug for mig” kan give din ven en følelse af ikke at være glemt midt i sorgen. Det behøver ikke være perfekt formuleret — det vigtigste er, at du rækker ud og viser, at du husker dem, også når dagene går videre for alle andre.",
+    image: "../../img/img-uge44/texting.webp",
+  },
+];
+---
+
+<section class="karrusel-wrapper">
+  <h2 class="karrusel-titel">Gode råd til at støtte en ven i sorg</h2>
+
+  <div class="karrusel">
+    <!-- Desktop: pile inde i karrusellen -->
+    <button class="pil venstre desktop-pil" id="forrige-desktop" aria-label="Forrige">&#8249;</button>
+
+    <div class="slides-container">
+      {
+        slides.map((slide, i) => (
+          <div class={`slide ${i === 0 ? "aktiv" : ""}`} data-index={i}>
+            <div class="billede">
+              <img src={slide.image} alt={slide.title} />
+            </div>
+            <div class="tekst">
+              <h3>{slide.title}</h3>
+              <p>{slide.text}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <button class="pil højre desktop-pil" id="næste-desktop" aria-label="Næste">&#8250;</button>
+  </div>
+
+  <!-- Mobil: pile og dots samlet i en række under karrusellen -->
+  <div class="mobil-navigation">
+    <button class="pil" id="forrige-mobil" aria-label="Forrige">&#8249;</button>
+    <div class="dots" id="dots">
+      {slides.map((_, i) => <button class={`dot ${i === 0 ? "aktiv" : ""}`} data-i={i} aria-label={`Gå til slide ${i + 1}`} />)}
+    </div>
+    <button class="pil" id="næste-mobil" aria-label="Næste">&#8250;</button>
+  </div>
+
+  <!-- Desktop: dots under karrusellen -->
+  <div class="desktop-dots" id="desktop-dots">
+    {slides.map((_, i) => <button class={`dot ${i === 0 ? "aktiv" : ""}`} data-i={i} aria-label={`Gå til slide ${i + 1}`} />)}
+  </div>
+</section>
+
+<style>
+  .karrusel-wrapper {
+    padding: 2rem 1rem 3rem;
+    text-align: center;
+  }
+
+  .karrusel-titel {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  /* ── DESKTOP ── */
+  .karrusel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5c5ae;
+    border-radius: 60% 60% 60% 60% / 20% 20% 20% 20%;
+    padding: 3rem 5rem;
+    min-height: 420px;
+  }
+
+  .slides-container {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .slide {
+    display: none;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .slide.aktiv {
+    display: flex;
+  }
+
+  .tekst {
+    flex: 1;
+    text-align: left;
+  }
+
+  .tekst h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .tekst p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #333;
+  }
+
+  .billede {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .billede img {
+    width: 100%;
+    max-width: 340px;
+    border-radius: 16px;
+    object-fit: cover;
+  }
+
+  .pil {
+    background: #e56c45;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 3rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s;
+    display: flex;
+    padding-bottom: 0.15em;
+    padding-left: 0.05em;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pil:hover {
+    background: #a8522a;
+  }
+
+  /* Desktop dots */
+  .desktop-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1.25rem;
+  }
+
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #d4b0a0;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .dot.aktiv {
+    background: #e56c45;
+  }
+
+  /* Skjul mobil-navigation på desktop */
+  .mobil-navigation {
+    display: none;
+  }
+
+  /* ── MOBIL ── */
+  @media (max-width: 800px) {
+    .karrusel {
+      border-radius: 24px;
+      padding: 1.5rem 1.25rem 2rem;
+      flex-direction: column;
+      min-height: unset;
+    }
+
+    /* Skjul desktop-pile på mobil */
+    .desktop-pil {
+      display: none;
+    }
+
+    /* Skjul desktop-dots på mobil */
+    .desktop-dots {
+      display: none;
+    }
+
+    .slide.aktiv {
+      flex-direction: column;
+    }
+
+    .billede {
+      width: 100%;
+    }
+
+    .billede img {
+      max-width: 100%;
+      border-radius: 12px;
+    }
+
+    .tekst {
+      text-align: left;
+      padding: 0 0.25rem;
+    }
+
+    /* Vis mobil-navigation */
+    .mobil-navigation {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .mobil-navigation .dots {
+      display: flex;
+      gap: 10px;
+    }
+  }
+</style>
+
+<script>
+  const slides = document.querySelectorAll(".slide");
+  const allDots = document.querySelectorAll(".dot");
+  let aktuel = 0;
+
+  function visSlide(n) {
+    slides[aktuel].classList.remove("aktiv");
+    allDots.forEach((dot, i) => {
+      if (Number((dot as HTMLElement).dataset.i) === aktuel) {
+        dot.classList.remove("aktiv");
+      }
+    });
+
+    aktuel = (n + slides.length) % slides.length;
+
+    slides[aktuel].classList.add("aktiv");
+    allDots.forEach((dot) => {
+      if (Number((dot as HTMLElement).dataset.i) === aktuel) {
+        dot.classList.add("aktiv");
+      }
+    });
+  }
+
+  document.getElementById("forrige-desktop")?.addEventListener("click", () => visSlide(aktuel - 1));
+  document.getElementById("næste-desktop")?.addEventListener("click", () => visSlide(aktuel + 1));
+  document.getElementById("forrige-mobil")?.addEventListener("click", () => visSlide(aktuel - 1));
+  document.getElementById("næste-mobil")?.addEventListener("click", () => visSlide(aktuel + 1));
+
+  allDots.forEach((dot) => {
+    dot.addEventListener("click", () => visSlide(Number((dot as HTMLElement).dataset.i)));
+  });
+</script>
