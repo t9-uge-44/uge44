@@ -1,0 +1,185 @@
+<div class="carousel-wrapper">
+  <button class="btn btn-prev" onclick="scroll(-1)">&#8249;</button>
+  <button class="btn btn-next" onclick="scroll(1)">&#8250;</button>
+  <div class="blob-container">
+    <svg width="2204" height="595" viewBox="0 0 2204 595" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M1161.54 0C1022.85 0 148.08 88.5454 95.1128 153.085C42.1452 217.625 82.5531 298.3 56.3426 390.387C30.1321 482.474 -56.1419 416.754 56.3438 505.299C168.829 593.844 459.326 436.43 929.473 522.615C1393.3 607.641 1421.86 605.719 1838.33 577.689L1855.57 576.529C2288.58 547.407 2221.97 356.936 2155.35 295.938C2088.73 234.94 1933.11 29.5151 1802.06 29.5151C1671.01 29.5151 1300.24 0 1161.54 0Z"
+        fill="#FDD8C8"></path>
+    </svg>
+  </div>
+  <div class="carousel-track" id="track">
+    <!-- KORT 1 -->
+    <div class="card">
+      <div class="card-image"><img src="../../public/img/img-uge44/walk&talk.webp" alt="Walk & talk" style="width:100%;height:180px;object-fit:cover;" /></div>
+      <div class="card-body">
+        <h2 class="card-title">Walk &amp; talk</h2>
+        <p class="card-subtitle">Tips til arrangøren</p>
+        <p class="card-text">
+          Tag med på en rolig gåtur, hvor vi undervejs taler om livets store spørgsmål. Samtalerne foregår i små grupper, og der vil være samtalekort som hjælp. Formålet er at gøre det lettere og mere naturligt at tale om døden i afslappede rammer.
+        </p>
+      </div>
+    </div>
+
+    <!-- KORT 2 -->
+    <div class="card">
+      <div class="card-image"><img src="../../public/img/img-uge44/presentation3.webp" alt="presentation af død og sorg" style="width:100%;height:180px;object-fit:cover;" /></div>
+      <div class="card-body">
+        <h2 class="card-title">Minioplæg og samtale</h2>
+        <p class="card-subtitle">Tips til arrangøren</p>
+        <p class="card-text">Start med et kort oplæg om døden eller sorg, og giv derefter deltagerne mulighed for at tale sammen i mindre grupper.</p>
+      </div>
+    </div>
+
+    <!-- KORT 3 -->
+    <div class="card">
+      <div class="card-image"><img src="../../public/img/img-uge44/cafe.webp" alt="Cafébesøg og samtale" style="width:100%;height:180px;object-fit:cover;" /></div>
+      <div class="card-body">
+        <h2 class="card-title">Cafébesøg og samtale</h2>
+        <p class="card-subtitle">Tips til arrangøren</p>
+        <p class="card-text">Inviter til en uformel workshop på en café, hvor deltagerne kan tale om liv, død og det at være der for andre i trygge og afslappede rammer.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image"><img src="../../public/img/img-uge44/workshop-close.webp" alt="Kreativ workshop" style="width:100%;height:180px;object-fit:cover;" /></div>
+      <div class="card-body">
+        <h2 class="card-title">Kreativ workshop</h2>
+        <p class="card-subtitle">Tips til arrangøren</p>
+        <p class="card-text">Lav en kreativ aktivitet, hvor deltagerne kan arbejde med tanker om livet og det at mindes andre mennesker på en positiv måde.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-image"><img src="../../public/img/img-uge44/presentation.webp" alt="Del & Lyt" style="width:100%;height:180px;object-fit:cover;" /></div>
+      <div class="card-body">
+        <h2 class="card-title">Del &amp; Lyt</h2>
+        <p class="card-subtitle">Tips til arrangøren</p>
+        <p class="card-text">
+          Skab et trygt rum, hvor deltagerne kan dele tanker og erfaringer og samtidig lytte til hinanden i små grupper. Brug eventuelt samtalekort som støtte. Formålet er at gøre det lettere at tale åbent om livet og døden i et roligt fællesskab.
+        </p>
+      </div>
+    </div>
+
+    <!-- Tilføj flere kort her ved at kopiere et <div class="card">...</div> blok -->
+  </div>
+</div>
+
+<script>
+  function scroll(direction: number) {
+    const track = document.getElementById("track");
+
+    if (!track) return;
+
+    track.scrollBy({ left: direction * 280, behavior: "smooth" });
+  }
+</script>
+<style>
+  .blob-container {
+    position: absolute;
+    top: -40px;
+    right: -200px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body {
+    margin: 0;
+  }
+
+  .carousel-wrapper {
+    position: relative;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 70px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 40px 30px;
+    scrollbar-width: none; /* Firefox */
+    margin: 0em 3em;
+    position: relative;
+    z-index: 1;
+  }
+
+  .carousel-track::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  /* KORT */
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    min-width: 260px;
+    max-width: 260px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  }
+
+  /* Billedpladsholder – erstat med <img> */
+  .card-image {
+    width: 100%;
+    height: 180px;
+    background: #f0d0c4;
+    border-bottom: 1px solid #f0e0d8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #b08070;
+    font-style: italic;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin: 0 0 10px;
+  }
+
+  .card-subtitle {
+    font-size: 13px;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+  }
+
+  .card-text {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* PIL-KNAPPER */
+  .btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e46b45;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+    font-size: 30px;
+    color: #fff;
+  }
+
+  .btn-prev {
+    left: 4px;
+  }
+  .btn-next {
+    right: 4px;
+  }
+</style>

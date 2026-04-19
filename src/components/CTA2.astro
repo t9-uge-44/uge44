@@ -1,0 +1,61 @@
+---
+import "../styles/global.css";
+interface Props {
+  text: string;
+  filename: string;
+}
+const { text, filename } = Astro.props;
+---
+
+<div class="cta-wrapper">
+  <a href={filename} download class="cta-btn">{text}</a>
+</div>
+
+<style>
+  .cta-wrapper {
+    display: inline-block;
+    margin: 1em;
+  }
+
+  .cta-btn {
+    position: relative;
+    display: inline-block;
+    background: #e56c45;
+    color: #fff;
+    padding: 14px 40px;
+    border-radius: 16px;
+    border: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.25em;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    scale: 100%;
+    transition: scale 0.3s ease;
+    &:hover {
+      scale: 110%;
+    }
+  }
+
+  .cta-btn::after {
+    content: "";
+    position: absolute;
+    bottom: -14px;
+    left: 36px;
+    border-right: 14px solid transparent;
+    border-top: 16px solid #e56c45;
+  }
+
+  .cta-btn:hover::after {
+    border-top-color: #e56c45;
+  }
+
+  .cta-btn:active {
+    background: #a8522a;
+  }
+
+  .cta-btn:active::after {
+    border-top-color: #a8522a;
+  }
+</style>
