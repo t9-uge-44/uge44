@@ -1,0 +1,192 @@
+---
+// src/components/ArrangorSektion.astro
+import "../styles/global.css";
+interface Props {
+  imageSrc?: string;
+  imageAlt?: string;
+  downloadHref?: string;
+}
+
+const { imageSrc, imageAlt = "Illustration af person ved computer", downloadHref = "#" } = Astro.props;
+import CTA2 from "../components/CTA2.astro";
+---
+
+<section class="arrangor-sektion">
+  <div class="arrangor-inner">
+    <!-- VENSTRE: Tekst -->
+    <div class="arrangor-tekst">
+      <h2 class="arrangor-heading">Skal du arrangere næste uge 44 event?</h2>
+
+      <p>Er du en del af en forening, arbejder du på det lokale bibliotek, er du engageret i en menighed – eller repræsenterer du et andet fællesskab med lyst til at skabe noget meningsfuldt?</p>
+
+      <p>Så har du nu muligheden for at blive arrangør af et event i Uge 44-kampagnen.</p>
+
+      <p>
+        Vi søger engagerede aktører, der vil være med til at skabe oplevelser, fællesskab og inspiration i lokalsamfundet. Som arrangør får du mulighed for at sætte dit præg på kampagnen og være med til at gøre en forskel. Kunne det være noget for
+        jer?
+      </p>
+
+      <p>Så tøv ikke med at kontakte os – vi vil meget gerne høre fra dig.</p>
+
+      <div class="arrangor-kontakt">
+        <a href="tel:33364970" class="kontakt-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.58 2.2 2 2 0 012.54 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l.88-.88a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+            ></path>
+          </svg>
+          33 36 49 70
+        </a>
+        <a href="mailto:info@livogdoed.dk" class="kontakt-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          info@livogdoed.dk
+        </a>
+      </div>
+
+      <div class="arrangor-download">
+        <p class="download-label"><strong>Download logoer og andet materiale herunder:</strong></p>
+        <CTA2 text="Logoer" filename="/download/archive.zip" />
+      </div>
+    </div>
+
+    <!-- HØJRE: Billede -->
+    <div class="arrangor-billede">
+      <img src="../../public/img/img-uge44/arrange.webp" alt="" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .arrangor-sektion {
+    padding: 60px 0;
+  }
+
+  .arrangor-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 60px;
+    align-items: center;
+  }
+
+  /* TEKST */
+  .arrangor-tekst {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .arrangor-heading {
+    margin: 0 0 2em;
+  }
+
+  .arrangor-tekst p {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.7;
+    margin: 0 0 14px;
+  }
+
+  /* KONTAKT */
+  .arrangor-kontakt {
+    display: flex;
+    gap: 32px;
+    margin: 8px 0 24px;
+    flex-wrap: wrap;
+  }
+
+  .kontakt-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #1a1a1a;
+    text-decoration: none;
+  }
+
+  .kontakt-link:hover {
+    color: #c94f28;
+  }
+
+  /* DOWNLOAD */
+  .download-label {
+    font-size: 14px;
+    color: #1a1a1a;
+    margin: 0 0 12px;
+  }
+
+  .download-btn {
+    position: relative;
+    display: inline-block;
+    background: #c94f28;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .download-btn:hover {
+    background: #b03f1f;
+  }
+
+  /* Lille "boble-hale" under knappen */
+  .download-btn-bubble {
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 12px solid #c94f28;
+  }
+
+  /* BILLEDE */
+  .arrangor-billede {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f5ddd4;
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .arrangor-billede img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .billede-placeholder {
+    font-size: 13px;
+    color: #b08070;
+    font-style: italic;
+  }
+
+  /* RESPONSIV */
+  @media (max-width: 768px) {
+    .arrangor-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 0 20px;
+    }
+
+    .arrangor-billede {
+      order: -1;
+    }
+
+    .arrangor-heading {
+      font-size: 1.5rem;
+    }
+  }
+</style>
