@@ -1,0 +1,211 @@
+---
+const events = [
+  {
+    title: "Walk & Talk",
+    subtitle: "Tips til arrangøren",
+    description:
+      "Tag med på en rolig gåtur, hvor vi undervejs taler om livets store spørgsmål. Samtalerne foregår i små grupper, og der vil være samtalekort som hjælp. Formålet er at gøre det lettere og mere naturligt at tale om døden i afslappede rammer.",
+    image: "/img/img-uge44/walk&talk.webp",
+    imageAlt: "Walk & talk",
+  },
+  {
+    title: "Minioplæg og samtale",
+    subtitle: "Tips til arrangøren",
+    description: "Start med et kort oplæg om døden eller sorg, og giv derefter deltagerne mulighed for at tale sammen i mindre grupper.",
+    image: "/img/img-uge44/presentation3.webp",
+    imageAlt: "Presentation af død og sorg",
+  },
+  {
+    title: "Cafébesøg og samtale",
+    subtitle: "Tips til arrangøren",
+    description: "Inviter til en uformel workshop på en café, hvor deltagerne kan tale om liv, død og det at være der for andre i trygge og afslappede rammer.",
+    image: "/img/img-uge44/cafe.webp",
+    imageAlt: "Cafébesøg og samtale",
+  },
+  {
+    title: "Kreativ workshop",
+    subtitle: "Tips til arrangøren",
+    description: "Lav en kreativ aktivitet, hvor deltagerne kan arbejde med tanker om livet og det at mindes andre mennesker på en positiv måde.",
+    image: "/img/img-uge44/workshop-close.webp",
+    imageAlt: "Kreativ workshop",
+  },
+  {
+    title: "Del & Lyt",
+    subtitle: "Tips til arrangøren",
+    description:
+      "Skab et trygt rum, hvor deltagerne kan dele tanker og erfaringer og samtidig lytte til hinanden i små grupper. Brug eventuelt samtalekort som støtte. Formålet er at gøre det lettere at tale åbent om livet og døden i et roligt fællesskab.",
+    image: "/img/img-uge44/presentation.webp",
+    imageAlt: "Del & Lyt",
+  },
+];
+---
+
+<div class="carousel-wrapper">
+  <button class="btn btn-prev" onclick="scrollCarousel(-1)">&#8249;</button>
+  <button class="btn btn-next" onclick="scrollCarousel(1)">&#8250;</button>
+
+  <div class="blob-container">
+    <svg width="2204" height="595" viewBox="0 0 2204 595" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M1161.54 0C1022.85 0 148.08 88.5454 95.1128 153.085C42.1452 217.625 82.5531 298.3 56.3426 390.387C30.1321 482.474 -56.1419 416.754 56.3438 505.299C168.829 593.844 459.326 436.43 929.473 522.615C1393.3 607.641 1421.86 605.719 1838.33 577.689L1855.57 576.529C2288.58 547.407 2221.97 356.936 2155.35 295.938C2088.73 234.94 1933.11 29.5151 1802.06 29.5151C1671.01 29.5151 1300.24 0 1161.54 0Z"
+        fill="#FDD8C8"></path>
+    </svg>
+  </div>
+
+  <div class="carousel-track" id="track">
+    {
+      events.map((event) => (
+        <a href="/kalender.html" class="card">
+          <div class="card-image">
+            <img src={event.image} alt={event.imageAlt} />
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">{event.title}</h2>
+            <p class="card-subtitle">{event.subtitle}</p>
+            <p class="card-text">{event.description}</p>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  function scrollCarousel(direction: number) {
+    const track = document.getElementById("track");
+    if (!track) return;
+    track.scrollBy({ left: direction * 280, behavior: "smooth" });
+  }
+
+  // Expose to global scope for onclick attributes
+  (window as any).scrollCarousel = scrollCarousel;
+</script>
+
+<style>
+  .blob-container {
+    position: absolute;
+    top: -40px;
+    right: 0px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .carousel-wrapper {
+    position: relative;
+    margin: 4em 0em 6em 0em;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 70px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 40px 30px;
+    scrollbar-width: none;
+    margin: 0em 3em;
+    position: relative;
+    z-index: 1;
+  }
+
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* KORT */
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    min-width: 260px;
+    max-width: 260px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-image {
+    width: 100%;
+    height: 180px;
+    background: #f0d0c4;
+    border-bottom: 1px solid #f0e0d8;
+    overflow: hidden;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover .card-image img {
+    transform: scale(1.04);
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin: 0 0 10px;
+  }
+
+  .card-subtitle {
+    font-size: 13px;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+  }
+
+  .card-text {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* PIL-KNAPPER */
+  .btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e46b45;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    font-size: 30px;
+    color: #fff;
+  }
+
+  .btn-prev {
+    left: 4px;
+  }
+
+  .btn-next {
+    right: 4px;
+  }
+</style>
