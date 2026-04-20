@@ -19,7 +19,24 @@ export async function getStaticPaths() {
   }));
 }
 
-const { event } = Astro.props;
+interface Event {
+  id: number;
+  titel: string;
+  beskrivelse: string;
+  teaser: string;
+  billede: string;
+  lokation: string;
+  dato: string;
+  tidsrum: string;
+  ugedag: string;
+  type: string;
+}
+
+interface Props {
+  event: Event;
+}
+
+const { event } = Astro.props as Props;
 
 const niceToKnow = [
   `Lokation: ${event.lokation}`,
