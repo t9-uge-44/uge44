@@ -8,21 +8,30 @@ interface Props {
 }
 import CTA2 from "../components/CTA2.astro";
 
-const { imageSrc, imageAlt = "Illustration af computer med bøger og planter", filmHref = "#", bogHref = "#" } = Astro.props;
+const {
+  imageSrc,
+  imageAlt = "Illustration af computer med bøger og planter",
+  filmHref = "#",
+  bogHref = "#",
+} = Astro.props;
 ---
 
 <section class="fob-sektion">
   <!-- Blob baggrund venstre -->
   <div class="blob blob-left" aria-hidden="true">
     <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-      <path d="M250,30 C370,10 470,100 480,220 C490,340 400,450 270,460 C140,470 30,380 20,250 C10,120 130,50 250,30Z" fill="#f0a98a"></path>
+      <path
+        d="M250,30 C370,10 470,100 480,220 C490,340 400,450 270,460 C140,470 30,380 20,250 C10,120 130,50 250,30Z"
+        fill="#f0a98a"></path>
     </svg>
   </div>
 
   <!-- Blob baggrund højre -->
   <div class="blob blob-right" aria-hidden="true">
     <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-      <path d="M260,40 C380,20 470,110 475,240 C480,370 390,460 255,455 C120,450 25,360 30,230 C35,100 140,60 260,40Z" fill="#f5c4b0"></path>
+      <path
+        d="M260,40 C380,20 470,110 475,240 C480,370 390,460 255,455 C120,450 25,360 30,230 C35,100 140,60 260,40Z"
+        fill="#f5c4b0"></path>
     </svg>
   </div>
 
@@ -30,12 +39,19 @@ const { imageSrc, imageAlt = "Illustration af computer med bøger og planter", f
     <!-- VENSTRE: Billede -->
     <div class="fob-billede">
       <img src="../../img/img-uge44/bogliste.webp" alt="" />
+      <img
+        src="../../public/img/img-uge44/bogliste.webp"
+        alt="bøger og planter"
+      />
     </div>
 
     <!-- HØJRE: Tekst + knapper -->
     <div class="fob-tekst">
       <h2 class="fob-heading">Film- og bogliste</h2>
-      <p class="fob-beskrivelse">Her kan I downloade en film- og bogliste med anbefalinger, som kan bruges til at hente inspiration til indhold og formidling i jeres event.</p>
+      <p class="fob-beskrivelse">
+        Her kan I downloade en film- og bogliste med anbefalinger, som kan
+        bruges til at hente inspiration til indhold og formidling i jeres event.
+      </p>
       <div class="fob-knapper">
         <CTA2 text="Filmliste" filename="/download/filmliste.pdf" />
         <CTA2 text="Bogliste" filename="/download/bogliste.pdf" />

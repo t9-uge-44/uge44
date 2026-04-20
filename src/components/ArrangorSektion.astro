@@ -6,7 +6,11 @@ interface Props {
   downloadHref?: string;
 }
 
-const { imageSrc, imageAlt = "Illustration af person ved computer", downloadHref = "#" } = Astro.props;
+const {
+  imageSrc,
+  imageAlt = "Illustration af person ved computer",
+  downloadHref = "#",
+} = Astro.props;
 import CTA2 from "../components/CTA2.astro";
 ---
 
@@ -16,20 +20,39 @@ import CTA2 from "../components/CTA2.astro";
     <div class="arrangor-tekst">
       <h2 class="arrangor-heading">Skal du arrangere næste uge 44 event?</h2>
 
-      <p>Er du en del af en forening, arbejder du på det lokale bibliotek, er du engageret i en menighed – eller repræsenterer du et andet fællesskab med lyst til at skabe noget meningsfuldt?</p>
-
-      <p>Så har du nu muligheden for at blive arrangør af et event i Uge 44-kampagnen.</p>
+      <p>
+        Er du en del af en forening, arbejder du på det lokale bibliotek, er du
+        engageret i en menighed – eller repræsenterer du et andet fællesskab med
+        lyst til at skabe noget meningsfuldt?
+      </p>
 
       <p>
-        Vi søger engagerede aktører, der vil være med til at skabe oplevelser, fællesskab og inspiration i lokalsamfundet. Som arrangør får du mulighed for at sætte dit præg på kampagnen og være med til at gøre en forskel. Kunne det være noget for
-        jer?
+        Så har du nu muligheden for at blive arrangør af et event i Uge
+        44-kampagnen.
+      </p>
+
+      <p>
+        Vi søger engagerede aktører, der vil være med til at skabe oplevelser,
+        fællesskab og inspiration i lokalsamfundet. Som arrangør får du mulighed
+        for at sætte dit præg på kampagnen og være med til at gøre en forskel.
+        Kunne det være noget for jer?
       </p>
 
       <p>Så tøv ikke med at kontakte os – vi vil meget gerne høre fra dig.</p>
 
       <div class="arrangor-kontakt">
         <a href="tel:33364970" class="kontakt-link">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <path
               d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.58 2.2 2 2 0 012.54 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l.88-.88a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
             ></path>
@@ -37,8 +60,20 @@ import CTA2 from "../components/CTA2.astro";
           33 36 49 70
         </a>
         <a href="mailto:info@livogdoed.dk" class="kontakt-link">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            ></path>
             <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
           info@livogdoed.dk
@@ -46,7 +81,9 @@ import CTA2 from "../components/CTA2.astro";
       </div>
 
       <div class="arrangor-download">
-        <p class="download-label"><strong>Download logoer og andet materiale herunder:</strong></p>
+        <p class="download-label">
+          <strong>Download logoer og andet materiale herunder:</strong>
+        </p>
         <CTA2 text="Logoer" filename="/download/archive.zip" />
       </div>
     </div>
@@ -54,6 +91,10 @@ import CTA2 from "../components/CTA2.astro";
     <!-- HØJRE: Billede -->
     <div class="arrangor-billede">
       <img src="../../img/img-uge44/arrange.webp" alt="" />
+      <img
+        src="../../public/img/img-uge44/arrange.webp"
+        alt="mand der sidder ved en computer"
+      />
     </div>
   </div>
 </section>
