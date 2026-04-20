@@ -21,7 +21,15 @@ export async function getStaticPaths() {
 
 const { event } = Astro.props;
 
-const niceToKnow = ["Varighed: ca. 60 minutter", "Gratis at deltage", "Målgruppe: Unge og unge voksne", "Du kan deltage alene eller med en ven", "Fokus på konkrete redskaber", "Workshoppen foregår i trygge og uformelle rammer"];
+const niceToKnow = [
+  `Lokation: ${event.lokation}`,
+  `Tidspunkt: ${event.dato} kl: ${event.tidsrum} `,
+  "Gratis at deltage",
+  "Målgruppe: Unge og unge voksne",
+  "Du kan deltage alene eller med en ven",
+  "Fokus på konkrete redskaber",
+  "Workshoppen foregår i trygge og uformelle rammer",
+];
 ---
 
 <html lang="da">
@@ -42,20 +50,17 @@ const niceToKnow = ["Varighed: ca. 60 minutter", "Gratis at deltage", "Målgrupp
       <section class="hero">
         <div class="hero-tekst">
           <h1>{event.titel}</h1>
-          <p class="teaser">{event.teaser}</p>
+          <div class="beskrivelse-tekst">
+            <p>{event.beskrivelse}</p>
+          </div>
+        </div>
+        <div class="hero-højre">
+          <div class="hero-billede">
+            <img src={event.billede} alt={event.titel} />
+          </div>
           <div class="cta-wrapper">
             <CTA1 text="Tilmeld dig" href="/kalender" />
           </div>
-        </div>
-        <div class="hero-billede">
-          <img src={event.billede} alt={event.titel} />
-        </div>
-      </section>
-
-      <!-- Beskrivelse sektion -->
-      <section class="beskrivelse-sektion">
-        <div class="beskrivelse-tekst">
-          <p>{event.beskrivelse}</p>
         </div>
       </section>
 
@@ -68,7 +73,7 @@ const niceToKnow = ["Varighed: ca. 60 minutter", "Gratis at deltage", "Målgrupp
           </ul>
         </div>
         <div class="ntk-billede">
-          <img src={event.billede} alt="Nice to know" />
+          <img src="/img/img-uge44/tjekliste.webp" alt="Nice to know" />
         </div>
       </section>
     </main>
@@ -89,10 +94,10 @@ const niceToKnow = ["Varighed: ca. 60 minutter", "Gratis at deltage", "Målgrupp
   /* ── Hero ── */
   .hero {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 3rem;
     margin-bottom: 3rem;
-    background: #f5e8e2;
+    background: #faba9d;
     border-radius: 32px;
     padding: 3rem;
   }
@@ -108,21 +113,19 @@ const niceToKnow = ["Varighed: ca. 60 minutter", "Gratis at deltage", "Målgrupp
     line-height: 1.2;
   }
 
-  .teaser {
+  .beskrivelse-tekst p {
     font-size: 1rem;
     line-height: 1.7;
     color: #444;
-    margin-bottom: 1.5rem;
   }
 
-  .cta-wrapper {
-    padding-bottom: 20px;
-  }
-
-  .hero-billede {
+  /* Højre kolonne: billede + knap stablet lodret */
+  .hero-højre {
     flex: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
   }
 
   .hero-billede img {
@@ -133,17 +136,8 @@ const niceToKnow = ["Varighed: ca. 60 minutter", "Gratis at deltage", "Målgrupp
     aspect-ratio: 4/3;
   }
 
-  /* ── Beskrivelse ── */
-  .beskrivelse-sektion {
-    margin-bottom: 3rem;
-    padding: 0 1rem;
-  }
-
-  .beskrivelse-tekst p {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #333;
-    max-width: 600px;
+  .cta-wrapper {
+    padding-bottom: 20px;
   }
 
   /* ── Nice to know ── */
@@ -151,7 +145,7 @@ const niceToKnow = ["Varighed: ca. 60 minutter", "Gratis at deltage", "Målgrupp
     display: flex;
     align-items: flex-start;
     gap: 3rem;
-    background: #f5e8e2;
+    background: #fdd8c8;
     border-radius: 32px;
     padding: 3rem;
     margin-bottom: 3rem;
