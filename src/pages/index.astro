@@ -3,6 +3,8 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CTA1 from "../components/CTA1.astro";
 import Karrusel from "../components/Karrusel.astro";
+import EventCard from "../components/EventCard.astro";
+import EventKort from "../components/EventKort.astro";
 
 const forsideSlides = [
   {
@@ -41,45 +43,183 @@ const forsideSlides = [
     <header>
       <Header />
     </header>
+    <section class="om-os">
+      <div class="om-os__image">
+        <img src="../../public/img/img-uge44/gravestone.webp" alt="To unge mennesker ved en gravsten" />
+      </div>
 
-    <main>
-      <section>
+      <div class="om-os__content">
         <h1>Om os og konceptet</h1>
-        <img src="/img/img-uge44/gravestone.webp" alt="gravsted" />
         <p>
-          I uge 44 sætter vi fokus på døden - og på hvordan vi kan være der for hinanden. Mange unge oplever, at det kan være svært at tale om døden, især når en ven har mistet. Derfor samler vi i uge 44 arrangementer, gode råd og inspiration, der
+          I uge 44 sætter vi fokus på døden – og på hvordan vi kan være der for hinanden. Mange unge oplever, at det kan være svært at tale om døden, især når en ven har mistet. Derfor samler vi i uge 44 arrangementer, gode råd og inspiration, der
           gør det lettere at starte samtalen og støtte andre i sorg.
         </p>
-        <CTA1 text="Kalender" href="/kalender" />
-        <CTA1 text="Inspiration" href="/guide" />
-      </section>
+        <div class="om-os__ctas">
+          <CTA1 text="Kalender" href="/kalender" />
+          <CTA1 text="Inspiration" href="/guide" />
+        </div>
+      </div>
+    </section>
 
-      <section>
-        <Karrusel slides={forsideSlides} titel="Gode råd til at støtte en ven i sorg" />
-      </section>
+    <section>
+      <Karrusel slides={forsideSlides} titel="Gode råd til at støtte en ven i sorg" />
+    </section>
+    <div>
+      <h2>Hvad sker der i uge 44?</h2>
+      <EventKort events="#" />
+    </div>
+    <section class="inspiration">
+      <h2>Find inspiration og viden</h2>
 
-      <section>
-        <h2>Hvad sker der i uge 44?</h2>
-        <p>Card</p>
-        <p>Card</p>
-        <p>Card</p>
-        <p>Card</p>
-      </section>
+      <div class="inspiration__inner">
+        <div class="inspiration__text">
+          <p>
+            Bliv klogere på, hvordan du kan støtte en ven i sorg. Det kan være svært at vide, hvad man skal sige eller gøre, når en person tæt på dig mister. Her finder du artikler, personlige fortællinger og konkrete råd, der kan hjælpe dig med at
+            forstå sorg bedre og gøre det lettere at tage de svære samtaler.
+          </p>
+          <p>Formålet er at give dig inspiration og redskaber, så du kan føle dig mere tryg i at være der for andre – også når ordene er svære at finde.</p>
+          <CTA1 text="Se mere" href="/inspiration.html" />
+        </div>
 
-      <section>
-        <h2>Find inspiration og viden</h2>
-        <img src="/img/img-uge44/inspo.webp" alt="inspiration" />
-        <p>
-          Bliv klogere på, hvordan du kan støtte en ven i sorg. Det kan være svært at vide, hvad man skal sige eller gøre, når en person tæt på dig mister. Her finder du artikler, personlige fortællinger og konkrete råd, der kan hjælpe dig med at
-          forstå sorg bedre og gøre det lettere at tage de svære samtaler.
-        </p>
-        <p>Formålet er at give dig inspiration og redskaber, så du kan føle dig mere tryg i at være der for andre – også når ordene er svære at finde.</p>
-        <CTA1 text="Se mere" href="/guide" />
-      </section>
-    </main>
-
+        <div class="inspiration__image">
+          <img src="../../public/img/img-uge44/inspo.webp" alt="Person der sidder og læser ved en computer" />
+        </div>
+      </div>
+    </section>
     <footer>
       <Footer />
     </footer>
   </body>
 </html>
+
+<style>
+  h2 {
+    margin: 2em 0em 2em 5em;
+  }
+  .om-os {
+    display: flex;
+    align-items: center;
+    padding: 4rem 6rem;
+    justify-content: space-between;
+    min-height: 600px;
+  }
+
+  .om-os__image {
+    flex: 0 0 auto;
+    width: 420px;
+    aspect-ratio: 1 / 1;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .om-os__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .om-os__content {
+    max-width: 560px;
+  }
+
+  .om-os__content h2 {
+    margin: 0 0 1.5rem;
+    line-height: 1.1;
+  }
+
+  .om-os__content p {
+    line-height: 1.7;
+    margin: 0 0 2.5rem;
+  }
+
+  .om-os__ctas {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 768px) {
+    .om-os {
+      flex-direction: column;
+      padding: 2.5rem 1.5rem;
+      gap: 2rem;
+    }
+
+    .om-os__image {
+      width: 100%;
+    }
+
+    .om-os__content h2 {
+    }
+
+    .om-os__ctas {
+      flex-wrap: wrap;
+    }
+  }
+  .inspiration {
+    background-color: #fff;
+    border-radius: 1.5rem;
+    margin: 2rem auto 4rem;
+    max-width: 900px;
+    padding: 3rem 3.5rem;
+  }
+
+  .inspiration h2 {
+    color: #1a1a1a;
+    text-align: center;
+    margin: 0 0 2.5rem;
+  }
+
+  .inspiration__inner {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .inspiration__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .inspiration__text p {
+    line-height: 1.7;
+    color: #333;
+    margin: 0;
+  }
+
+  .inspiration__image {
+    flex: 0 0 300px;
+    width: 300px;
+    aspect-ratio: 1 / 1;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: #f5d5c8;
+  }
+
+  .inspiration__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .inspiration {
+      padding: 2rem 1.5rem;
+      margin: 1rem;
+    }
+
+    .inspiration__inner {
+      flex-direction: column-reverse;
+      gap: 1.5rem;
+    }
+
+    .inspiration__image {
+      flex: none;
+      width: 100%;
+    }
+  }
+</style>
